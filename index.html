@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="lo" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIVEA KIK - ໂລຊັນບຳລຸງຜິວກາຍຊຶມໄວໃນ 1 ວິນາທີ</title>
+    <!-- ໂຫຼດ Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ໂຫຼດ Font ພາສາລາວ Noto Sans Lao ແລະ Font ພາສາອັງກິດ Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans Lao"', '"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', '"Noto Sans Lao"', 'sans-serif'],
+                    },
+                    colors: {
+                        nivea: {
+                            dark: '#00132C',
+                            navy: '#001F4D',
+                            blue: '#0032A0',
+                            light: '#0066CC',
+                            cyan: '#00D2FF',
+                            gold: '#F5B82E',
+                            goldHover: '#E0A319'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styles ສຳລັບແສງເງົາ ແລະ ຂວດໂລຊັນ 3D CSS */
+        .hero-bg {
+            background: radial-gradient(circle at 75% 45%, #0044CC 0%, #001F4D 45%, #001026 100%);
+        }
+        .bottle-shadow {
+            box-shadow: 0 25px 50px -12px rgba(0, 210, 255, 0.28), inset 0 2px 10px rgba(255, 255, 255, 0.5);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-nivea-blue selection:text-white">
+
+    <!-- =====================================================================
+         ສ່ວນທີ 1: 01. HEADER / NAVIGATION (ຊື່ຮ້ານ, Logo ແລະ ເມນູນຳທາງ)
+         ===================================================================== -->
+    <header class="sticky top-0 z-50 bg-[#00132C]/95 backdrop-blur-md border-b border-white/10 text-white transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand Name -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-nivea-blue to-nivea-dark border-2 border-white flex flex-col items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                        <span class="font-display font-extrabold text-[10px] tracking-wider text-white leading-none">NIVEA</span>
+                        <span class="text-[8px] font-bold text-nivea-cyan tracking-widest mt-0.5">KIK</span>
+                    </div>
+                    <div>
+                        <span class="font-display font-extrabold text-xl tracking-tight text-white block leading-none">NIVEA <span class="text-nivea-gold">Kik</span></span>
+                        <span class="text-[11px] text-slate-300 font-normal">ນີເວຍ ກິກ ໂລຊັນ</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#home" class="text-white hover:text-nivea-gold transition-colors">ໜ້າຫຼັກ</a>
+                    <a href="#features" class="text-slate-300 hover:text-nivea-gold transition-colors">ຄຸນສົມບັດ</a>
+                    <a href="#details" class="text-slate-300 hover:text-nivea-gold transition-colors">ລາຍລະອຽດ</a>
+                    <a href="#pricing" class="text-slate-300 hover:text-nivea-gold transition-colors">ລາຄາ & ໂປຣໂມຊັນ</a>
+                    <a href="#footer" class="text-slate-300 hover:text-nivea-gold transition-colors">ຕິດຕໍ່</a>
+                </nav>
+
+                <!-- CTA Button & Mobile Menu Button -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openOrderModal('320 ml', '79,000 ກີບ')" class="bg-nivea-gold hover:bg-nivea-goldHover text-nivea-dark font-bold text-sm px-5 py-2.5 rounded-full shadow-lg shadow-nivea-gold/20 transition-all transform hover:-translate-y-0.5 active:scale-95">
+                        ສັ່ງຊື້ເລີຍ
+                    </button>
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobile-menu-btn" aria-label="ເປີດເມນູ" class="md:hidden p-2 rounded-xl text-slate-200 hover:bg-white/10 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#001838] border-t border-white/10 px-4 pt-3 pb-5 space-y-2">
+            <a href="#home" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-white hover:bg-white/10">ໜ້າຫຼັກ</a>
+            <a href="#features" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-300 hover:bg-white/10">ຄຸນສົມບັດ</a>
+            <a href="#details" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-300 hover:bg-white/10">ລາຍລະອຽດ</a>
+            <a href="#pricing" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-300 hover:bg-white/10">ລາຄາ & ໂປຣໂມຊັນ</a>
+            <a href="#footer" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-300 hover:bg-white/10">ຕິດຕໍ່</a>
+        </div>
+    </header>
+
+    <!-- =====================================================================
+         ສ່ວນທີ 2: 02. PRODUCT INTRODUCTION (ຮູບສິນຄ້າ, ຊື່ສິນຄ້າ ແລະ ຄຳໂຄສະນາ)
+         ===================================================================== -->
+    <section id="home" class="hero-bg relative overflow-hidden text-white pt-12 pb-20 lg:py-24">
+        <!-- ແສງປະກາຍພື້ນຫຼັງ -->
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-nivea-cyan/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-10 w-72 h-72 bg-nivea-gold/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- ຂໍ້ຄວາມໂຄສະນາ (ຊ້າຍ) -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-nivea-cyan text-xs sm:text-sm font-semibold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-nivea-gold animate-ping"></span>
+                        ສູດໃໝ່ລ່າສຸດ! ຊຶມໄວພາຍໃນ 1 ວິນາທີ
+                    </div>
+
+                    <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
+                        ENGINEERED FOR <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-nivea-cyan to-nivea-gold">
+                            INSTANT BRIGHTNESS
+                        </span> <br>
+                        & QUICK ABSORPTION
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-blue-100 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        ອອກແບບເພື່ອຄວາມກະຈ່າງໃສ ແລະ ຊຶມໄວໃນທັນທີ — <strong class="text-white">ໂລຊັນ ນີເວຍ ກິກ (NIVEA Extra Bright Kik)</strong> ບຳລຸງຜິວເລິກດ້ວຍວິຕາມິນຊີ 50 ເທົ່າ ບໍ່ໜຽວເໜີໜະ.
+                    </p>
+
+                    <!-- ປຸ່ມກົດ CTA -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <button onclick="openOrderModal('320 ml', '79,000 ກີບ')" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-nivea-gold hover:bg-nivea-goldHover text-nivea-dark font-extrabold text-base shadow-xl shadow-nivea-gold/25 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <span>ສັ່ງຊື້ຕອນນີ້ (ຫຼຸດ 20%)</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                        </button>
+                        <a href="#details" class="w-full sm:w-auto px-8 py-4 rounded-2xl glass-card hover:bg-white/15 text-white font-semibold text-base transition-all text-center">
+                            ເບິ່ງລາຍລະອຽດສິນຄ້າ
+                        </a>
+                    </div>
+
+                    <!-- ຈຸດເດັ່ນຫຍໍ້ໃຕ້ປຸ່ມ -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
+                        <div>
+                            <div class="text-2xl font-display font-extrabold text-nivea-gold">1 ວິ</div>
+                            <div class="text-xs text-slate-300">ຊຶມເຂົ້າຜິວທັນທີ</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-display font-extrabold text-nivea-cyan">50x</div>
+                            <div class="text-xs text-slate-300">ວິຕາມິນຊີເຂັ້ມຂຸ້ນ</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-display font-extrabold text-white">SPF 30</div>
+                            <div class="text-xs text-slate-300">ປົກປ້ອງແສງແດດ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ຮູບສິນຄ້າ 3D CSS/SVG Illustration (ຂວາ) -->
+                <div class="lg:col-span-5 flex justify-center items-center relative">
+                    <!-- ວົງແຫວນແສງດ້ານຫຼັງຂວດ -->
+                    <div class="absolute w-72 h-72 sm:w-80 sm:h-80 rounded-full border border-nivea-cyan/30 animate-pulse-slow"></div>
+                    <div class="absolute w-60 h-60 sm:w-64 sm:h-64 rounded-full bg-gradient-to-tr from-nivea-blue/40 to-nivea-cyan/20 blur-xl"></div>
+
+                    <!-- ຕົວຂວດ NIVEA QUICK ທີ່ອອກແບບດ້ວຍ CSS & SVG ໃຫ້ຄືຈິງ -->
+                    <div class="relative z-10 animate-float flex flex-col items-center">
+                        <!-- ຝາຂວດສີເງິນ-ຟ້າ -->
+                        <div class="w-20 h-9 bg-gradient-to-r from-slate-200 via-white to-slate-300 rounded-t-xl border-b-2 border-nivea-blue shadow-md flex items-center justify-center">
+                            <div class="w-8 h-1 bg-slate-400/50 rounded-full"></div>
+                        </div>
+                        <!-- ຄໍຂວດ -->
+                        <div class="w-24 h-3 bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900"></div>
+                        <!-- ຕົວຂວດຫຼັກ -->
+                        <div class="w-48 sm:w-52 h-80 sm:h-88 rounded-3xl bg-gradient-to-br from-[#0052D4] via-[#0032A0] to-[#001845] bottle-shadow border border-white/25 p-5 flex flex-col justify-between items-center relative overflow-hidden">
+                            <!-- ແສງສະທ້ອນຂ້າງຂວດ -->
+                            <div class="absolute top-0 left-3 w-4 h-full bg-gradient-to-b from-white/30 via-white/10 to-transparent rounded-full blur-[1px]"></div>
+                            
+                            <!-- ໂລໂກ້ NIVEA ວົງມົນ -->
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-b from-[#00287A] to-[#001540] border-2 border-white/80 shadow-inner flex flex-col items-center justify-center mt-2">
+                                <span class="font-display font-black text-white text-sm tracking-widest">NIVEA</span>
+                                <span class="text-[9px] font-bold text-nivea-gold tracking-wider">KIK</span>
+                            </div>
+
+                            <!-- ຊື່ສູດສິນຄ້າເທິງຂວດ -->
+                            <div class="text-center z-10">
+                                <div class="text-white font-display font-extrabold text-lg tracking-tight leading-tight">Extra Bright</div>
+                                <div class="text-nivea-cyan font-semibold text-xs tracking-wide mt-0.5">NIVEA Kik Lotion</div>
+                            </div>
+
+                            <!-- ຢົດນ້ຳວິຕາມິນຊີສີທອງ (SVG) -->
+                            <div class="relative my-1 flex items-center justify-center">
+                                <svg class="w-16 h-16 drop-shadow-[0_0_12px_rgba(245,184,46,0.8)]" viewBox="0 0 64 64" fill="none">
+                                    <path d="M32 6C32 6 14 26.5 14 40C14 49.9411 22.0589 58 32 58C41.9411 58 50 49.9411 50 40C50 26.5 32 6 32 6Z" fill="url(#goldDrop)"/>
+                                    <ellipse cx="25" cy="38" rx="3.5" ry="7" transform="rotate(-20 25 38)" fill="white" fill-opacity="0.65"/>
+                                    <defs>
+                                        <linearGradient id="goldDrop" x1="14" y1="6" x2="50" y2="58" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#FFE58F"/>
+                                            <stop offset="0.5" stop-color="#F5B82E"/>
+                                            <stop offset="1" stop-color="#D48806"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+
+                            <!-- ແຖບລຸ່ມຂວດ -->
+                            <div class="w-full text-center border-t border-white/15 pt-2">
+                                <span class="inline-block bg-nivea-gold text-nivea-dark font-extrabold text-[10px] px-2.5 py-0.5 rounded-full">50x VITAMIN C</span>
+                                <p class="text-[9px] text-blue-200 mt-1">1 SEC QUICK ABSORB</p>
+                            </div>
+                        </div>
+
+                        <!-- ປ້າຍລອຍບອກຈຸດເດັ່ນ -->
+                        <div class="absolute -right-6 top-16 glass-card px-3 py-2 rounded-2xl shadow-lg border border-nivea-cyan/40">
+                            <div class="text-xs font-bold text-nivea-gold">⚡ ຊຶມໄວ 1 ວິນາທີ</div>
+                            <div class="text-[10px] text-slate-200">ບໍ່ໜຽວຕິດເສື້ອຜ້າ</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         ສ່ວນທີ 3: 03. PRODUCT FEATURES (ຈຸດເດັ່ນ ແລະ ຄຸນສົມບັດຂອງສິນຄ້າ)
+         ===================================================================== -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- ຫົວຂໍ້ Section -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-nivea-blue font-bold text-sm tracking-wider uppercase bg-blue-50 px-4 py-1.5 rounded-full">Product Features</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">ຈຸດເດັ່ນ ແລະ ຄຸນສົມບັດຂອງສິນຄ້າ</h2>
+                <p class="text-slate-600 mt-3 text-base sm:text-lg">
+                    ນະວັດຕະກຳການບຳລຸງຜິວທີ່ອອກແບບມາສຳລັບສະພາບອາກາດຮ້ອນໂດຍສະເພາະ ໃຫ້ຜິວນຸ່ມຊຸ່ມຊື່ນໂດຍບໍ່ຮູ້ສຶກໜັກຜິວ
+                </p>
+            </div>
+
+            <!-- Grid 4 ຄຸນສົມບັດຫຼັກ -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-slate-50 hover:bg-white rounded-3xl p-7 border border-slate-200/80 hover:border-nivea-blue/40 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 text-nivea-blue flex items-center justify-center mb-6 group-hover:bg-nivea-blue group-hover:text-white transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">ຊຶມໄວພາຍໃນ 1 ວິນາທີ</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        ເນື້ອໂລຊັນອະນຸພາກນ້ຳ (Micro-Water Gel) ແຕກຕົວທັນທີທີ່ທາ ຊຶມເຂົ້າສູ່ຊັ້ນຜິວຢ່າງລວດໄວ.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-50 hover:bg-white rounded-3xl p-7 border border-slate-200/80 hover:border-nivea-blue/40 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center mb-6 group-hover:bg-cyan-600 group-hover:text-white transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">ບໍ່ໜຽວເໜີໜະ</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        ສູດ Oil-Free ບາງເບົາສະບາຍຜິວ ສາມາດໃສ່ເສື້ອຜ້າໄດ້ທັນທີຫຼັງທາ ບໍ່ຖິ້ມຄາບຂາວ ຫຼື ຄວາມມັນ.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-50 hover:bg-white rounded-3xl p-7 border border-slate-200/80 hover:border-nivea-blue/40 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center mb-6 group-hover:bg-nivea-gold group-hover:text-nivea-dark transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">ປົກປ້ອງຈາກແສງແດດ</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        ຜະສານ UV Filter ແລະ ວິຕາມິນຊີ 50 ເທົ່າ ຊ່ວຍຟື້ນບຳລຸງຜິວຄ້ຳເສຍໃຫ້ກັບມາກະຈ່າງໃສສະໝ່ຳສະເໝີ.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-slate-50 hover:bg-white rounded-3xl p-7 border border-slate-200/80 hover:border-nivea-blue/40 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">ຊຸ່ມຊື່ນຍາວນານ 24 ຊມ.</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        ກັກເກັບຄວາມຊຸ່ມຊື່ນໃຫ້ຜິວນຸ່ມເດັ້ງຕະຫຼອດມື້ ແມ້ຢູ່ໃນຫ້ອງແອ ຫຼື ກາງແຈ້ງ.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         ສ່ວນທີ 4: 04. PRODUCT DETAILS (ລາຍລະອຽດ, ຂະໜາດ, ສີ ແລະ ວິທີໃຊ້)
+         ===================================================================== -->
+    <section id="details" class="py-20 bg-slate-100 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- ດ້ານຊ້າຍ: Visual Preview ເນື້ອໂລຊັນ ແລະ ຕົວເລືອກຂະໜາດ -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white rounded-3xl p-8 shadow-lg border border-slate-200/80">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold uppercase tracking-wider text-nivea-blue bg-blue-50 px-3 py-1 rounded-full">ຂໍ້ມູນຈຳເພາະ</span>
+                            <span id="selected-size-badge" class="text-sm font-bold text-slate-700">ຂະໜາດ: 320 ml</span>
+                        </div>
+
+                        <!-- ພາບຈຳລອງເນື້ອຄຣີມໂລຊັນສີຂາວບາງເບົາ -->
+                        <div class="relative h-64 rounded-2xl bg-gradient-to-br from-[#001F4D] to-[#0044CC] flex flex-col items-center justify-center p-6 text-white overflow-hidden">
+                            <!-- ວົງຄຣີມ SVG -->
+                            <svg class="w-36 h-36 drop-shadow-xl" viewBox="0 0 120 120" fill="none">
+                                <path d="M25 75C18 55 32 25 60 22C88 19 105 42 98 68C91 94 62 102 42 95C31 91 28 83 25 75Z" fill="url(#lotionSwirl)"/>
+                                <path d="M35 68C32 52 44 34 62 32C80 30 90 46 84 64C78 82 56 86 44 80" stroke="white" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+                                <circle cx="62" cy="58" r="10" fill="#00D2FF" fill-opacity="0.35"/>
+                                <defs>
+                                    <linearGradient id="lotionSwirl" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#FFFFFF"/>
+                                        <stop offset="0.7" stop-color="#E2E8F0"/>
+                                        <stop offset="1" stop-color="#CBD5E1"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <p class="text-sm font-semibold mt-2 text-blue-100">ເນື້ອໂລຊັນສີຂາວບາງເບົາ ກິ່ນຫອມສົດຊື່ນ</p>
+                            <p id="size-usage-duration" class="text-xs text-nivea-gold mt-1">ໃຊ້ໄດ້ປະມານ 1 - 1.5 ເດືອນ</p>
+                        </div>
+
+                        <!-- ປຸ່ມທົດລອງເລືອກຂະໜາດ -->
+                        <div class="mt-6">
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2.5">ເລືອກເບິ່ງຂະໜາດບັນຈຸ:</label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <button type="button" onclick="selectSizePreview('180 ml', 'ໃຊ້ໄດ້ປະມານ 2-3 ອາທິດ (ພົກພາສະດວກ)', this)" class="size-btn py-2.5 px-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 hover:border-nivea-blue transition-all">
+                                    180 ml
+                                </button>
+                                <button type="button" onclick="selectSizePreview('320 ml', 'ໃຊ້ໄດ້ປະມານ 1 - 1.5 ເດືອນ (ຂະໜາດຍອດນິຍົມ)', this)" class="size-btn py-2.5 px-3 rounded-xl border-2 border-nivea-blue bg-blue-50 text-sm font-bold text-nivea-blue transition-all">
+                                    320 ml
+                                </button>
+                                <button type="button" onclick="selectSizePreview('500 ml', 'ໃຊ້ໄດ້ປະມານ 2 - 2.5 ເດືອນ (ຂວດໃຫຍ່ສຸດຄຸ້ມ)', this)" class="size-btn py-2.5 px-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 hover:border-nivea-blue transition-all">
+                                    500 ml
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ດ້ານຂວາ: ລາຍລະອຽດ 4 ຫົວຂໍ້ຍ່ອຍ -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <span class="text-nivea-blue font-bold text-sm tracking-wider uppercase">Product Details</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">ລາຍລະອຽດ, ຂະໜາດ, ສີ ແລະ ວິທີໃຊ້</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <!-- 1. ລາຍລະອຽດສິນຄ້າ -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <h3 class="font-bold text-lg text-nivea-navy flex items-center gap-2 mb-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-nivea-blue"></span>
+                                ລາຍລະອຽດສິນຄ້າ
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                ໂລຊັນບຳລຸງຜິວກາຍສູດເຂັ້ມຂຸ້ນ ຜະສານວິຕາມິນຊີບໍລິສຸດ 95% ແລະ ຄໍລາເຈນ ຊ່ວຍຟື້ນບຳລຸງຜິວທີ່ໝອງຄ້ຳໃຫ້ດູກະຈ່າງໃສ ສີຜິວສະໝ່ຳສະເໝີຢ່າງເປັນທຳມະຊາດ.
+                            </p>
+                        </div>
+
+                        <!-- 2. ຂະໜາດບັນຈຸ -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <h3 class="font-bold text-lg text-nivea-navy flex items-center gap-2 mb-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-nivea-gold"></span>
+                                ຂະໜາດບັນຈຸ
+                            </h3>
+                            <ul class="text-sm text-slate-600 space-y-1.5">
+                                <li>• <strong>180 ml:</strong> ຂວດນ້ອຍ ພົກພາງ່າຍ</li>
+                                <li>• <strong>320 ml:</strong> ຂວດກາງ ໃຊ້ປະຈຳວັນ</li>
+                                <li>• <strong>500 ml:</strong> ຂວດປ້ຳໃຫຍ່ ປະຢັດສຸດຄຸ້ມ</li>
+                            </ul>
+                        </div>
+
+                        <!-- 3. ສີ ແລະ ເນື້ອສຳຜັດ -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <h3 class="font-bold text-lg text-nivea-navy flex items-center gap-2 mb-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+                                ສີ ແລະ ເນື້ອສຳຜັດ
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                <strong>ສີ:</strong> ເນື້ອໂລຊັນສີຂາວບໍລິສຸດ (Pure White)<br>
+                                <strong>ເນື້ອສຳຜັດ:</strong> ບາງເບົາຄ້າຍຄືນ້ຳ ຊຶມໄວທັນທີ ພ້ອມກິ່ນຫອມດອກໄມ້ອ່ອນໆ ໃຫ້ຄວາມຮູ້ສຶກສົດຊື່ນ.
+                            </p>
+                        </div>
+
+                        <!-- 4. ວິທີໃຊ້ -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <h3 class="font-bold text-lg text-nivea-navy flex items-center gap-2 mb-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                ວິທີໃຊ້
+                            </h3>
+                            <ol class="text-sm text-slate-600 space-y-1.5 list-decimal list-inside">
+                                <li>ບີບໂລຊັນລົງເທິງຝ່າມືໃນປະລິມານທີ່ພໍເໝາະ</li>
+                                <li>ລູບໄລ້ໃຫ້ທົ່ວຜິວກາຍ ເນື້ອຄຣີມຈະຊຶມເຂົ້າຜິວທັນທີ</li>
+                                <li>ຄວນທາເປັນປະຈຳທຸກເຊົ້າ ແລະ ກ່ອນນອນ</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         ສ່ວນທີ 5: 05. PRICE & CONTACT (ລາຄາສິນຄ້າ, ໂປຣໂມຊັນ ແລະ ປຸ່ມສັ່ງຊື້)
+         ===================================================================== -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="inline-block bg-amber-100 text-amber-800 font-extrabold text-xs sm:text-sm px-4 py-1.5 rounded-full">
+                    🔥 ໂປຣໂມຊັນພິເສດ ຫຼຸດທັນທີ 20% ທຸກຂະໜາດ
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">ເລືອກຂະໜາດ ແລະ ສັ່ງຊື້ສິນຄ້າ</h2>
+                <p class="text-slate-600 mt-2">ຈັດສົ່ງຟຣີທົ່ວນະຄອນຫຼວງວຽງຈັນ ແລະ ບໍລິການເກັບເງິນປາຍທາງທົ່ວປະເທດ</p>
+            </div>
+
+            <!-- ຕາຕະລາງລາຄາ 3 ຂະໜາດ -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
+                
+                <!-- ຂະໜາດ 180 ml -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 flex flex-col justify-between hover:shadow-xl transition-all">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-bold text-slate-500">ຂະໜາດພົກພາ</span>
+                            <span class="text-xs font-bold bg-blue-100 text-nivea-blue px-2.5 py-1 rounded-full">ຫຼຸດ 20%</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-900">NIVEA Kik 180 ml</h3>
+                        <p class="text-sm text-slate-500 mt-1">ເໝາະສຳລັບຜູ້ເລີ່ມຕົ້ນທົດລອງໃຊ້</p>
+                        
+                        <div class="my-6">
+                            <span class="text-sm text-slate-400 line-through block">ປົກກະຕິ 55,000 ກີບ</span>
+                            <span class="text-4xl font-extrabold text-nivea-blue">45,000 <span class="text-lg font-bold">ກີບ</span></span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-600 mb-8 border-t border-slate-200 pt-5">
+                            <li class="flex items-center gap-2">✅ ຊຶມໄວພາຍໃນ 1 ວິນາທີ</li>
+                            <li class="flex items-center gap-2">✅ ວິຕາມິນຊີ 50 ເທົ່າ</li>
+                            <li class="flex items-center gap-2">✅ ຂວດກະທັດຮັດ ພົກພາງ່າຍ</li>
+                        </ul>
+                    </div>
+                    <button onclick="openOrderModal('180 ml', '45,000 ກີບ')" class="w-full py-3.5 px-6 rounded-2xl bg-white hover:bg-nivea-blue text-nivea-blue hover:text-white border-2 border-nivea-blue font-bold transition-all">
+                        ສັ່ງຊື້ຂະໜາດ 180 ml
+                    </button>
+                </div>
+
+                <!-- ຂະໜາດ 320 ml (Best Seller) -->
+                <div class="bg-[#001838] text-white rounded-3xl p-8 border-2 border-nivea-gold shadow-2xl relative transform md:-translate-y-4 flex flex-col justify-between">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-nivea-gold text-nivea-dark font-extrabold text-xs px-4 py-1 rounded-full shadow-md whitespace-nowrap">
+                        ⭐ ຂາຍດີທີ່ສຸດ (BEST SELLER)
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-4 mt-2">
+                            <span class="text-sm font-bold text-nivea-cyan">ຂະໜາດມາດຕະຖານ</span>
+                            <span class="text-xs font-bold bg-white/15 text-nivea-gold px-2.5 py-1 rounded-full">ປະຢັດ 20,000 ₭</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white">NIVEA Kik 320 ml</h3>
+                        <p class="text-sm text-blue-200 mt-1">ຂະໜາດຍອດນິຍົມ ຄຸ້ມຄ່າທີ່ສຸດ</p>
+                        
+                        <div class="my-6">
+                            <span class="text-sm text-slate-400 line-through block">ປົກກະຕິ 99,000 ກີບ</span>
+                            <span class="text-4xl font-extrabold text-nivea-gold">79,000 <span class="text-lg font-bold text-white">ກີບ</span></span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-blue-100 mb-8 border-t border-white/15 pt-5">
+                            <li class="flex items-center gap-2">⭐ ຊຶມໄວພາຍໃນ 1 ວິນາທີ</li>
+                            <li class="flex items-center gap-2">⭐ ວິຕາມິນຊີ 50 ເທົ່າ + SPF 30</li>
+                            <li class="flex items-center gap-2">⭐ ແຖມຟຣີ! ຂະໜາດທົດລອງ 30 ml</li>
+                        </ul>
+                    </div>
+                    <button onclick="openOrderModal('320 ml', '79,000 ກີບ')" class="w-full py-4 px-6 rounded-2xl bg-nivea-gold hover:bg-nivea-goldHover text-nivea-dark font-extrabold shadow-lg shadow-nivea-gold/30 transition-all transform hover:-translate-y-0.5">
+                        ສັ່ງຊື້ຂະໜາດ 320 ml
+                    </button>
+                </div>
+
+                <!-- ຂະໜາດ 500 ml -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 flex flex-col justify-between hover:shadow-xl transition-all">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-bold text-slate-500">ຂວດປ້ຳສຸດຄຸ້ມ</span>
+                            <span class="text-xs font-bold bg-blue-100 text-nivea-blue px-2.5 py-1 rounded-full">ປະຢັດ 30,000 ₭</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-900">NIVEA Kik 500 ml</h3>
+                        <p class="text-sm text-slate-500 mt-1">ຫົວປ້ຳໃຊ້ງານງ່າຍ ໃຊ້ໄດ້ດົນ 2 ເດືອນ</p>
+                        
+                        <div class="my-6">
+                            <span class="text-sm text-slate-400 line-through block">ປົກກະຕິ 145,000 ກີບ</span>
+                            <span class="text-4xl font-extrabold text-nivea-blue">115,000 <span class="text-lg font-bold">ກີບ</span></span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-600 mb-8 border-t border-slate-200 pt-5">
+                            <li class="flex items-center gap-2">✅ ຫົວປ້ຳສະດວກຕໍ່ການໃຊ້ງານ</li>
+                            <li class="flex items-center gap-2">✅ ບຳລຸງຜິວຊຸ່ມຊື່ນ 24 ຊົ່ວໂມງ</li>
+                            <li class="flex items-center gap-2">✅ ຈັດສົ່ງຟຣີທົ່ວປະເທດ</li>
+                        </ul>
+                    </div>
+                    <button onclick="openOrderModal('500 ml', '115,000 ກີບ')" class="w-full py-3.5 px-6 rounded-2xl bg-white hover:bg-nivea-blue text-nivea-blue hover:text-white border-2 border-nivea-blue font-bold transition-all">
+                        ສັ່ງຊື້ຂະໜາດ 500 ml
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- ແຖບຊ່ອງທາງການຕິດຕໍ່ສັ່ງຊື້ດ່ວນໃນ Section 05 -->
+            <div class="mt-14 max-w-5xl mx-auto bg-slate-900 text-white rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl border border-slate-800">
+                <div class="space-y-2 text-center lg:text-left">
+                    <span class="text-xs font-bold uppercase tracking-wider text-nivea-gold">Contact & Direct Order</span>
+                    <h3 class="text-xl sm:text-2xl font-extrabold">ຕິດຕໍ່ສອບຖາມ ຫຼື ສັ່ງຊື້ໂດຍກົງ</h3>
+                    <p class="text-sm text-slate-300">
+                        📍 ທີ່ຕັ້ງຮ້ານ: <strong class="text-white">ບ້ານຄຳແກ້ວ ເມືອງຫີນບູນ ແຂວງຄຳມ່ວນ</strong>
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <a href="https://wa.me/8562054347207" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm flex items-center gap-2 shadow-lg transition-all">
+                        <span>💬 WhatsApp: 02054347207</span>
+                    </a>
+                    <a href="tel:02054347207" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm flex items-center gap-2 transition-all">
+                        <span>📞 ໂທ: 02054347207</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         ສ່ວນທີ 6: 06. FOOTER (ຂໍ້ມູນຕິດຕໍ່, Facebook ແລະ ເບີໂທ)
+         ===================================================================== -->
+    <footer id="footer" class="bg-[#001026] text-slate-300 pt-16 pb-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10">
+                
+                <!-- ຂໍ້ມູນແບຣນ -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-nivea-blue border-2 border-white flex flex-col items-center justify-center">
+                            <span class="font-display font-extrabold text-[9px] text-white leading-none">NIVEA</span>
+                            <span class="text-[7px] font-bold text-nivea-cyan leading-none mt-0.5">KIK</span>
+                        </div>
+                        <span class="font-display font-extrabold text-xl text-white">NIVEA <span class="text-nivea-gold">Kik</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        ໂລຊັນບຳລຸງຜິວກາຍ ນີເວຍ ກິກ (NIVEA Kik) — ອອກແບບເພື່ອຄວາມກະຈ່າງໃສ ແລະ ຊຶມໄວພາຍໃນ 1 ວິນາທີ ບໍ່ໜຽວເໜີໜະ ເໝາະສຳລັບທຸກສະພາບຜິວ.
+                    </p>
+                </div>
+
+                <!-- ຂໍ້ມູນຕິດຕໍ່ -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-bold text-lg">ຂໍ້ມູນຕິດຕໍ່ສັ່ງຊື້</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-nivea-gold">📞</span>
+                            <span>ເບີໂທ & ແອັບ: <a href="https://wa.me/8562054347207" target="_blank" rel="noopener noreferrer" class="text-white font-bold hover:text-nivea-gold transition-colors">02054347207</a></span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-nivea-cyan">📘</span>
+                            <span>ເຟສ: <strong class="text-white">Ms Kik Unmiinthavng</strong></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">📍</span>
+                            <span>ທີ່ຕັ້ງຮ້ານ: <strong class="text-white">ບ້ານຄຳແກ້ວ ເມືອງຫີນບູນ ແຂວງຄຳມ່ວນ</strong></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ປຸ່ມດ່ວນ -->
+                <div class="space-y-4">
+                    <h4 class="text-white font-bold text-lg">ສອບຖາມ ແລະ ສັ່ງຊື້ດ່ວນ</h4>
+                    <p class="text-sm text-slate-400">ພ້ອມໃຫ້ຄຳປຶກສາດ້ານການບຳລຸງຜິວ ແລະ ຈັດສົ່ງທົ່ວປະເທດ</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="openOrderModal('320 ml', '79,000 ກີບ')" class="px-5 py-2.5 rounded-xl bg-nivea-gold hover:bg-nivea-goldHover text-nivea-dark font-bold text-sm transition-all">
+                            ສັ່ງຊື້ຜ່ານເວັບໄຊ
+                        </button>
+                        <a href="https://wa.me/8562054347207" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all">
+                            ທັກແຊັດ WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+                <p>© 2026 NIVEA KIK LAOS (Ms Kik Unmiinthavng). ສະຫງວນລິຂະສິດ.</p>
+                <p>ທີ່ຕັ້ງຮ້ານ: ບ້ານຄຳແກ້ວ ເມືອງຫີນບູນ ແຂວງຄຳມ່ວນ</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =====================================================================
+         MODAL ຟອມສັ່ງຊື້ສິນຄ້າ (ແທນການໃຊ້ alert() ເພື່ອຄວາມສວຍງາມ)
+         ===================================================================== -->
+    <div id="order-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative animate-fade-in">
+            <!-- ປຸ່ມປິດ Modal -->
+            <button onclick="closeOrderModal()" aria-label="ປິດ" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 font-bold">
+                ✕
+            </button>
+
+            <!-- ຟອມສັ່ງຊື້ -->
+            <div id="order-form-container">
+                <span class="text-xs font-bold uppercase tracking-wider text-nivea-blue bg-blue-50 px-3 py-1 rounded-full">ຟອມສັ່ງຊື້ສິນຄ້າ</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 mt-2">ສັ່ງຊື້ NIVEA Kik</h3>
+                <p class="text-sm text-slate-500 mt-1">ກະລຸນາປ້ອນຂໍ້ມູນເພື່ອຢືນຢັນການສັ່ງຊື້</p>
+
+                <form id="order-form" onsubmit="submitOrder(event)" class="mt-5 space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ເລືອກຂະໜາດສິນຄ້າ</label>
+                        <select id="order-size" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-semibold focus:outline-none focus:border-nivea-blue">
+                            <option value="180 ml - 45,000 ກີບ">ຂະໜາດ 180 ml — 45,000 ກີບ</option>
+                            <option value="320 ml - 79,000 ກີບ" selected>ຂະໜາດ 320 ml — 79,000 ກີບ (ຂາຍດີ)</option>
+                            <option value="500 ml - 115,000 ກີບ">ຂະໜາດ 500 ml — 115,000 ກີບ</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ຊື່ ແລະ ນາມສະກຸນ *</label>
+                        <input type="text" id="customer-name" required placeholder="ຕົວຢ່າງ: ນາງ ມະນີວັນ ແກ້ວມະນີ" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-nivea-blue">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ເບີໂທລະສັບ / WhatsApp *</label>
+                        <input type="tel" id="customer-phone" required placeholder="020 XXXX XXXX" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-nivea-blue">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ທີ່ຢູ່ຈັດສົ່ງ *</label>
+                        <textarea id="customer-address" rows="2" required placeholder="ບ້ານ, ເມືອງ, ແຂວງ ຫຼື ຝາກຂົນສົ່ງ..." class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-nivea-blue"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 rounded-2xl bg-nivea-blue hover:bg-nivea-navy text-white font-bold text-base shadow-lg transition-all">
+                        ຢືນຢັນການສັ່ງຊື້
+                    </button>
+                </form>
+            </div>
+
+            <!-- ໜ້າຈໍຢືນຢັນເມື່ອສັ່ງຊື້ສຳເລັດ -->
+            <div id="order-success-container" class="hidden text-center py-6 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-3xl font-bold">
+                    ✓
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-900">ສັ່ງຊື້ສຳເລັດແລ້ວ!</h3>
+                <p id="order-summary-text" class="text-sm text-slate-600 leading-relaxed"></p>
+                <div class="flex flex-col gap-2.5 pt-2">
+                    <a id="whatsapp-order-link" href="https://wa.me/8562054347207" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm transition-all">
+                        ສົ່ງບິນສັ່ງຊື້ຜ່ານ WhatsApp (02054347207)
+                    </a>
+                    <button onclick="closeOrderModal()" class="w-full py-3 rounded-2xl bg-nivea-gold text-nivea-dark font-bold text-sm">
+                        ຕົກລົງ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         JAVASCRIPT ສຳລັບການໂຕ້ຕອບ (Menu, Size Selector, Order Modal)
+         ===================================================================== -->
+    <script>
+// ... existing code ... -->
+        function submitOrder(event) {
+            event.preventDefault();
+            const name = document.getElementById('customer-name').value;
+            const phone = document.getElementById('customer-phone').value;
+            const address = document.getElementById('customer-address').value;
+            const selectedProduct = orderSizeSelect.value;
+
+            document.getElementById('order-summary-text').innerHTML = 
+                `ຂອບໃຈຄຸນ <strong>${name}</strong> ທີ່ສັ່ງຊື້ <strong>NIVEA Kik (${selectedProduct})</strong>.<br>ຮ້ານ <strong>Ms Kik Unmiinthavng</strong> (ໂທ: 02054347207) ຈະຕິດຕໍ່ຫາເບີ <strong>${phone}</strong> ເພື່ອຢືນຢັນການຈັດສົ່ງໂດຍໄວ!`;
+
+            const waMessage = encodeURIComponent(`ສະບາຍດີ ຮ້ານ NIVEA Kik (Ms Kik Unmiinthavng)\nຂ້ອຍຕ້ອງການສັ່ງຊື້:\n- ສິນຄ້າ: NIVEA Kik (${selectedProduct})\n- ຊື່ຜູ້ສັ່ງ: ${name}\n- ເບີໂທ: ${phone}\n- ທີ່ຢູ່ຈັດສົ່ງ: ${address}`);
+            document.getElementById('whatsapp-order-link').href = `https://wa.me/8562054347207?text=${waMessage}`;
+
+            orderFormContainer.classList.add('hidden');
+            orderSuccessContainer.classList.remove('hidden');
+            document.getElementById('order-form').reset();
+        }
+
+        // ປິດ Modal ເມື່ອກົດພື້ນທີ່ດ້ານນອກ
+// ... existing code ... -->
